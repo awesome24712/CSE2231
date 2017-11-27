@@ -13,8 +13,27 @@ import components.simplewriter.SimpleWriter1L;
 import components.sortingmachine.SortingMachine;
 import components.sortingmachine.SortingMachine1L;
 
-public class Main {
+/**
+ * Utility class contains main function and sorting functions for generating a
+ * tag cloud from a given text.
+ *
+ * @author Michael Trunk, Khalid Musa, Milt Levy
+ *
+ */
+public final class Main {
 
+    /**
+     * Private default constructor prevents instantiation.
+     */
+    private Main() {
+    }
+
+    /**
+     * Main function manages user input and dispatches jobs.
+     *
+     * @param args
+     *            - command line arguments.
+     */
     public static void main(String[] args) {
         //open input and output streams
         SimpleReader in = new SimpleReader1L();
@@ -81,6 +100,11 @@ public class Main {
         }
     }
 
+    /**
+     * Compares the integer values of a Pair<String, Integer> .
+     *
+     * @author Michael Trunk
+     */
     static class CPopularityOrder
             implements Comparator<Map.Pair<String, Integer>> {
 
@@ -95,8 +119,22 @@ public class Main {
 
     }
 
+    /**
+     * Global ordering object.
+     */
     public static final CPopularityOrder POPULARITY_ORDER = new CPopularityOrder();
 
+    /**
+     * Given a map, returns an alphabetically ordered list of the given length
+     * whose elements are the most common strings appearing in the given map.
+     *
+     * @param pWordCounts
+     *            - map of words to their counts
+     * @param amountFirstWords
+     *            - the amount of most popular words to put into the returned
+     *            Sequence
+     * @return - the sequence of most common words
+     */
     public static Sequence<String> sortWordListAlphabeticalMostPop(
             Map<String, Integer> pWordCounts, int amountFirstWords) {
 
@@ -116,6 +154,7 @@ public class Main {
             i++;
         }
 
+        //now sort our result alphabetically
         sortWordList(pWordList);
 
         return pWordList;
