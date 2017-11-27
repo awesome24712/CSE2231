@@ -137,7 +137,7 @@ public class CWordCounter {
 
         for (String pWord : pWordList) {
             if (!pSeenWords.hasKey(pWord)) {
-                pOut.printTableRow(pWord, "" + countWord(pWordList, pWord));
+                pOut.printSized(pWord, countWord(pWordList, pWord));
                 pSeenWords.add(pWord, true);
             }
         }
