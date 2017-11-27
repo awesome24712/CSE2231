@@ -22,7 +22,8 @@ public class CWordCounter {
      *            - the sequence of Strings.
      * @return - a String-to-Integer map.
      */
-    public static Map<String, Integer> wordCountMap(Sequence<String> pWordList) {
+    public static Map<String, Integer> wordCountMap(
+            Sequence<String> pWordList) {
         assert pWordList != null : "pWordList is non-null";
 
         //Declare result
@@ -31,11 +32,11 @@ public class CWordCounter {
         //Iterate through all words
         for (int i = 0; i < pWordList.length(); i++) {
             String curWord = pWordList.entry(i);
-            //Add to the count if we already saw the word, 
+            //Add to the count if we already saw the word,
             //count its appearances and register it otherwise
             if (!pResultMap.hasKey(curWord)) {
-            	int count = countWord(pWordList, curWord);
-            	pResultMap.add(curWord, count);
+                int count = countWord(pWordList, curWord);
+                pResultMap.add(curWord, count);
             }
         }
 
@@ -115,8 +116,8 @@ public class CWordCounter {
      *            - the title of the HTML document, as it's placed in the
      *            {@code <title>} tag and in the text itself.
      */
-    public static void outputToHtml(Sequence<String> pWordList, String filename,
-            String title) {
+    public static void outputToHtml(Sequence<String> pWordList,
+            Map<String, Integer> pWordCounts, String filename, String title) {
         //Open the CHtmlWriter
         //Ignore the warning, it's in fact closed by closeBodyAndStream()
         CHtmlWriter pOut = new CHtmlWriter(filename, title);
@@ -136,7 +137,7 @@ public class CWordCounter {
 
         for (String pWord : pWordList) {
             if (!pSeenWords.hasKey(pWord)) {
-                pOut.printSized(pWord, countWord(pWordList, pWord));
+                pOut.printSized(pWord, pWordCounts.value(pWord));
                 pSeenWords.add(pWord, true);
             }
         }

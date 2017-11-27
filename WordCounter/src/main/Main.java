@@ -25,20 +25,28 @@ public class Main {
         out.println("Enter name of input file: ");
         filename = in.nextLine();
 
+        //get number of words from user
+        int numWords;
+        out.println("How many words in outputed file: ");
+        numWords = in.nextInteger();
+
         //Read from file to list
         out.print("Beginning reading from file...");
         Sequence<String> pRawWordList = CWordCounter
-                .separateWordsFromFile(filename, " ,.-\n\t");
+                .separateWordsFromFile(filename, " \t\n\r,-.!?[]';:/()");
 
         //Sort the words
-        sortWordList(pRawWordList);
+        Map<String, Integer> pWordCounts = CWordCounter
+                .wordCountMap(pRawWordList);
+        Sequence<String> pWordList = sortWordListAlphabeticalMostPop(
+                pWordCounts, numWords);
         out.println("Finished!");
 
         //Calculate results & write to file
         String title = "Words Counted in " + filename;
         out.println("Enter name of output file: ");
         filename = in.nextLine();
-        CWordCounter.outputToHtml(pRawWordList, filename, title);
+        CWordCounter.outputToHtml(pWordList, pWordCounts, filename, title);
 
         out.println("Finished writing to " + filename);
 
@@ -80,7 +88,7 @@ public class Main {
             if (o1.key().equals(o2.key())) {
                 return 0;
             } else {
-                return o1.value() < o2.value() ? -1 : 1;
+                return o1.value() < o2.value() ? 1 : -1;
             }
         }
 
