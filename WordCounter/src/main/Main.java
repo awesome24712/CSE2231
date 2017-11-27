@@ -43,7 +43,8 @@ public class Main {
         out.println("Finished!");
 
         //Calculate results & write to file
-        String title = "Words Counted in " + filename;
+        // Top 100 words in data/importance.txt
+        String title = "Top " + numWords + " words in " + filename;
         out.println("Enter name of output file: ");
         filename = in.nextLine();
         CWordCounter.outputToHtml(pWordList, pWordCounts, filename, title);
