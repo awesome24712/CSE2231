@@ -98,6 +98,8 @@ public class CHtmlWriter extends SimpleWriter1L {
     public void printHeader(String title) {
         this.println("<DOCTYPE html>\n<html>\n<head>");
         this.printlnNested(title, "title");
+        this.println(
+                "<link href=\"http://cse.osu.edu/software/2231/web-sw2/assignments/projects/tag-cloud-generator/data/tagcloud.css\" rel=\"stylesheet\" type=\"text/css\">");
         this.println("</head>\n<body>");
     }
 
