@@ -2,7 +2,10 @@ package main;
 
 import java.util.Comparator;
 
+import components.map.Map;
+import components.map.Map.Pair;
 import components.sequence.Sequence;
+import components.sequence.Sequence1L;
 import components.simplereader.SimpleReader;
 import components.simplereader.SimpleReader1L;
 import components.simplewriter.SimpleWriter;
@@ -69,6 +72,44 @@ public class Main {
         }
     }
 
-    //add function for sorting based on popularity of word in the sequence
-    //implement a comparator if necessary
+    static class CPopularityOrder
+            implements Comparator<Map.Pair<String, Integer>> {
+
+        @Override
+        public int compare(Pair<String, Integer> o1, Pair<String, Integer> o2) {
+            if (o1.key().equals(o2.key())) {
+                return 0;
+            } else {
+                return o1.value() < o2.value() ? -1 : 1;
+            }
+        }
+
+    }
+
+    public static final CPopularityOrder POPULARITY_ORDER = new CPopularityOrder();
+
+    public static Sequence<String> sortWordListAlphabeticalMostPop(
+            Map<String, Integer> pWordCounts, int amountFirstWords) {
+
+        SortingMachine<Map.Pair<String, Integer>> pSorter = new SortingMachine1L<>(
+                POPULARITY_ORDER);
+
+        //dump it into the black box
+        for (Map.Pair<String, Integer> currPair : pWordCounts) {
+            pSorter.add(currPair);
+        }
+        pSorter.changeToExtractionMode();
+        Sequence<String> pWordList = new Sequence1L<>();
+        //now take it all back out
+        int i = 0;
+        while (pSorter.size() > 0 & i < amountFirstWords) {
+            pWordList.add(pWordList.length(), pSorter.removeFirst().key());
+            i++;
+        }
+
+        sortWordList(pWordList);
+
+        return pWordList;
+    }
+
 }
