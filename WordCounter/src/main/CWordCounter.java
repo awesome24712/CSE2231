@@ -22,21 +22,20 @@ public class CWordCounter {
      *            - the sequence of Strings.
      * @return - a String-to-Integer map.
      */
-    public static Map<String, Integer> countWords(Sequence<String> pWordList) {
+    public static Map<String, Integer> wordCountMap(Sequence<String> pWordList) {
         assert pWordList != null : "pWordList is non-null";
 
         //Declare result
         Map<String, Integer> pResultMap = new Map1L<String, Integer>();
 
-        //Iterate through all words and count them
+        //Iterate through all words
         for (int i = 0; i < pWordList.length(); i++) {
             String curWord = pWordList.entry(i);
-            //Add to the count if we already saw the word, register it otherwise
-            if (pResultMap.hasKey(curWord)) {
-                int prevCount = pResultMap.value(curWord);
-                pResultMap.replaceValue(curWord, prevCount + 1);
-            } else {
-                pResultMap.add(curWord, 1);
+            //Add to the count if we already saw the word, 
+            //count its appearances and register it otherwise
+            if (!pResultMap.hasKey(curWord)) {
+            	int count = countWord(pWordList, curWord);
+            	pResultMap.add(curWord, count);
             }
         }
 
