@@ -163,7 +163,8 @@ public class CHtmlWriter extends SimpleWriter1L {
      * @updates this.content
      * @requires this.is_open
      * @ensures this.content = #this.content * (@code <font size = \"" + s +
-     *          "\">" + word + "</font>)
+     *          "\">" + word + "</font>). The printed size is within the bounds
+     *          of 1 and 7 inclusive.
      */
     public void printSized(String word, int size) {
         int s = size;
