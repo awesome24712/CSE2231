@@ -6,7 +6,7 @@ import components.simplewriter.SimpleWriter1L;
  * This class extends the functionality of SimpleWriter1L by providing extra
  * functions and utilities for opening, closing, and writing to new HTML files.
  *
- * @author Michael Trunk
+ * @author Michael Trunk, Milt Levy, Khalid Musa
  *
  */
 public class CHtmlWriter extends SimpleWriter1L {
@@ -79,6 +79,7 @@ public class CHtmlWriter extends SimpleWriter1L {
      *            - the
      * @requires |url| /= 0 and |url| /= 0 and out.is_open
      * @ensures formatLink = <a href=" * url * "> * text * </a>
+     * @return a String representation of the
      */
     public static String formatLink(String text, String url) {
         return "<a href=\"" + url + "\">" + text + "</a>";
@@ -170,8 +171,9 @@ public class CHtmlWriter extends SimpleWriter1L {
      */
     public void printSized(String word, int size) {
         int s = size;
-        if (s > 7) {
-            s = 7;
+        final int MAX_SIZE = 7;
+        if (s > MAX_SIZE) {
+            s = MAX_SIZE;
         } else if (s < 1) {
             s = 1;
         }
