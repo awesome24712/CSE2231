@@ -165,4 +165,6 @@ public class CHtmlWriter extends SimpleWriter1L {
         this.println("</body>\n<html>");
         this.close();
     }
+
+    //add a function printSized(String, int) for printing a given text with a certain size
 }

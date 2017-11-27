@@ -146,4 +146,6 @@ public class CWordCounter {
 
         pOut.closeBodyAndStream();
     }
+
+    //modify outputToHtml such that it only prints N words and uses the printSized(...)
 }

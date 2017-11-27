@@ -68,4 +68,7 @@ public class Main {
             pWordList.add(pWordList.length(), pSorter.removeFirst());
         }
     }
+
+    //add function for sorting based on popularity of word in the sequence
+    //implement a comparator if necessary
 }
