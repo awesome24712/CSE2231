@@ -154,6 +154,28 @@ public class CHtmlWriter extends SimpleWriter1L {
     }
 
     /**
+     * Prints a word with given a size.
+     *
+     * @param word
+     *            The word to be printed
+     * @param size
+     *            The size of the word to be printed
+     * @updates this.content
+     * @requires this.is_open
+     * @ensures this.content = #this.content * (@code <font size = \"" + s +
+     *          "\">" + word + "</font>)
+     */
+    public void printSized(String word, int size) {
+        int s = size;
+        if (s > 7) {
+            s = 7;
+        } else if (s < 1) {
+            s = 1;
+        }
+        this.println("<font size = \"" + s + "\">" + word + "</font>");
+    }
+
+    /**
      * Closes the HTML's {@code <body>} and {@code <html>} tags before closing
      * the output stream.
      *
@@ -165,6 +187,4 @@ public class CHtmlWriter extends SimpleWriter1L {
         this.println("</body>\n<html>");
         this.close();
     }
-
-    //add a function printSized(String, int) for printing a given text with a certain size
 }
