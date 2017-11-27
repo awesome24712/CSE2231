@@ -126,23 +126,29 @@ public class CWordCounter {
         pOut.printlnNested(title, "h2");
         pOut.printHorizontalLine();
 
-        pOut.openTable();
-
-        pOut.printTableRow("<b>Word</b>", "<b>Counts</b>");
 
         //Use a map to keep track of what words we've done already...
         //I tried to iterate through the map but it doesn't maintain order! >:(
         //And sequence doesn't have any contains(...) method, so...
         Map<String, Boolean> pSeenWords = new Map1L<>();
-
+        int maxCount = 0;
+        for (Map.Pair<String, Integer> wordPair : pWordCounts){
+        	if (wordPair.value()>maxCount){
+        		maxCount = wordPair.value();
+        	}
+        }
+        int minCount = maxCount;
+        for (Map.Pair<String, Integer> wordPair : pWordCounts){
+        	if (wordPair.value()<minCount){
+        		minCount = wordPair.value();
+        	}
+        }
         for (String pWord : pWordList) {
             if (!pSeenWords.hasKey(pWord)) {
-                pOut.printSized(pWord, pWordCounts.value(pWord));
+                pOut.printSized(pWord, (int)(7.0f*(pWordCounts.value(pWord)-minCount)/(maxCount-minCount) + 1));
                 pSeenWords.add(pWord, true);
             }
         }
-
-        pOut.closeTable();
 
         pOut.closeBodyAndStream();
     }
