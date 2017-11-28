@@ -155,12 +155,15 @@ public final class CWordCounter {
             }
         }
 
-        final float MAX_SIZE = 7.0f;
+        final float SIZE_RANGE = 37.0f;
+        final int MIN_SIZE = 11;
         for (String pWord : pWordList) {
             if (!pSeenWords.hasKey(pWord)) {
-                pOut.printSized(pWord,
-                        (int) (MAX_SIZE * (pWordCounts.value(pWord) - minCount)
-                                / (maxCount - minCount) + 1));
+                int size = (int) (SIZE_RANGE
+                        * (pWordCounts.value(pWord) - minCount)
+                        / (maxCount - minCount)) + MIN_SIZE;
+                pOut.printSpan(pWord, "f" + size,
+                        "count: " + pWordCounts.value(pWord));
                 pSeenWords.add(pWord, true);
             }
         }

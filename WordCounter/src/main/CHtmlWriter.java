@@ -183,6 +183,22 @@ public class CHtmlWriter extends SimpleWriter1L {
     }
 
     /**
+     * Prints out styled text with the given class. On hovering ocer the text, a
+     * message appears.
+     *
+     * @param text
+     *            - the formatted text
+     * @param className
+     *            - the CSS class name
+     * @param hoverText
+     *            - the text which appears when hovering over the text.
+     */
+    public void printSpan(String text, String className, String hoverText) {
+        this.println("<span style=\"default\" class = \"" + className + "\""
+                + " title = \"" + hoverText + "\">" + text + "</span>");
+    }
+
+    /**
      * Closes the HTML's {@code <body>} and {@code <html>} tags before closing
      * the output stream.
      *
