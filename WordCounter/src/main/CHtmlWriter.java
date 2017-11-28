@@ -42,7 +42,9 @@ public class CHtmlWriter extends SimpleWriter1L {
      * another string formatted into correct HTML tags.
      *
      * @param nested
+     *            - the inside text
      * @param wrapper
+     *            - the outside tag
      * @requires |wrapper| /= 0 and out.is_open
      * @updates this.content
      * @ensures this.content = #this.content * < * wrapper * > * nested * </ *
@@ -71,7 +73,7 @@ public class CHtmlWriter extends SimpleWriter1L {
 
     /**
      * This is a helper function which formats a string into a link tag,
-     * returning the result
+     * returning the result.
      *
      * @param text
      *            - the link's label text
@@ -79,7 +81,7 @@ public class CHtmlWriter extends SimpleWriter1L {
      *            - the
      * @requires |url| /= 0 and |url| /= 0 and out.is_open
      * @ensures formatLink = <a href=" * url * "> * text * </a>
-     * @return a String representation of the
+     * @return a formatted HTML link
      */
     public static String formatLink(String text, String url) {
         return "<a href=\"" + url + "\">" + text + "</a>";
