@@ -10,15 +10,21 @@ import components.simplereader.SimpleReader1L;
 /**
  * Contains simple utilities for separating and counting words.
  *
- * @author Michael Trunk
+ * @author Michael Trunk, Khalid Musa, Milt Levy
  *
  */
-public class CWordCounter {
+public final class CWordCounter {
+
+    /**
+     * Default constructor prevents instantiation.
+     */
+    private CWordCounter() {
+    }
 
     /**
      * Counts the number of time a String appears in a given sequence.
      *
-     * @param pWorldList
+     * @param pWordList
      *            - the sequence of Strings.
      * @return - a String-to-Integer map.
      */
@@ -44,7 +50,7 @@ public class CWordCounter {
     }
 
     /**
-     * Counts the number of times the given word appears in the list
+     * Counts the number of times the given word appears in the list.
      *
      * @param pWordList
      *            - the list
@@ -106,10 +112,12 @@ public class CWordCounter {
 
     /**
      * Given a sorted list of words, a filename, and a title, outputs results of
-     * word counts to file
+     * word counts to file.
      *
      * @param pWordList
      *            - the list of words
+     * @param pWordCounts
+     *            - map of words to their counts
      * @param filename
      *            - the fully-defined path and name of file
      * @param title
@@ -120,6 +128,7 @@ public class CWordCounter {
             Map<String, Integer> pWordCounts, String filename, String title) {
         //Open the CHtmlWriter
         //Ignore the warning, it's in fact closed by closeBodyAndStream()
+        @SuppressWarnings("resource")
         CHtmlWriter pOut = new CHtmlWriter(filename, title);
 
         //Add an on-screen title
@@ -161,6 +170,4 @@ public class CWordCounter {
 
         pOut.closeBodyAndStream();
     }
-
-    //modify outputToHtml such that it only prints N words and uses the printSized(...)
 }
