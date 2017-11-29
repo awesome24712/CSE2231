@@ -12,6 +12,7 @@ import components.simplewriter.SimpleWriter;
 import components.simplewriter.SimpleWriter1L;
 import components.sortingmachine.SortingMachine;
 import components.sortingmachine.SortingMachine1L;
+import components.utilities.Reporter;
 
 /**
  * Utility class contains main function and sorting functions for generating a
@@ -48,11 +49,15 @@ public final class Main {
         int numWords;
         out.println("How many words in outputed file: ");
         numWords = in.nextInteger();
+        Reporter.assertElseFatalError(numWords >= 1,
+                "Number of words must be greater than 0");
 
         //Read from file to list
         out.print("Beginning reading from file...");
         Sequence<String> pRawWordList = CWordCounter
                 .separateWordsFromFile(filename, " \t\n\r,-.!?[]';:/()");
+        Reporter.assertElseFatalError(pRawWordList.length() > 0,
+                "Text file must not be empty of words");
 
         //Sort the words
         Map<String, Integer> pWordCounts = CWordCounter
