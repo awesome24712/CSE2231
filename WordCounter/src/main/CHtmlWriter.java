@@ -207,7 +207,7 @@ public class CHtmlWriter extends SimpleWriter1L {
      * @ensures [the body and file have been closed] and NOT(out.is_open)
      */
     public void closeBodyAndStream() {
-        this.println("</body>\n<html>");
+        this.println("</body>\n</html>");
         this.close();
     }
 }
