@@ -155,10 +155,11 @@ public final class CWordCounter {
             }
         }
 
-        final float SIZE_RANGE = 37.0f;
-        final int MIN_SIZE = 11;
+        final float SIZE_RANGE = 38.0f;
+        final int MIN_SIZE = 10;
         for (String pWord : pWordList) {
             if (!pSeenWords.hasKey(pWord)) {
+                //this lerp gives us values 11-48
                 int size = (int) (SIZE_RANGE
                         * (pWordCounts.value(pWord) - minCount)
                         / (maxCount - minCount)) + MIN_SIZE;
