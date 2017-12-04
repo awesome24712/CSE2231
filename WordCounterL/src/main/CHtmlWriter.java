@@ -1,6 +1,9 @@
 package main;
 
-import components.simplewriter.SimpleWriter1L;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * This class extends the functionality of SimpleWriter1L by providing extra
@@ -9,16 +12,18 @@ import components.simplewriter.SimpleWriter1L;
  * @author Michael Trunk, Milt Levy, Khalid Musa
  *
  */
-public class CHtmlWriter extends SimpleWriter1L {
+public class CHtmlWriter extends PrintWriter {
 
     /**
      * Secondary constructor from parent class opens an empty output stream.
      *
      * @param filename
      *            - the name of the file the stream is to be saved to
+     * @throws IOException
+     *             if the root of the source is not found
      */
-    public CHtmlWriter(String filename) {
-        super(filename);
+    public CHtmlWriter(String filename) throws IOException {
+        super(new BufferedWriter(new FileWriter(filename)));
     }
 
     /**
@@ -31,9 +36,11 @@ public class CHtmlWriter extends SimpleWriter1L {
      *            write to
      * @param title
      *            - the title of the page
+     * @throws IOException
+     *             if the root of the source is not found
      */
-    public CHtmlWriter(String filename, String title) {
-        super(filename);
+    public CHtmlWriter(String filename, String title) throws IOException {
+        super(new BufferedWriter(new FileWriter(filename)));
         this.printHeader(title);
     }
 
