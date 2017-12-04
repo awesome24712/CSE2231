@@ -1,11 +1,12 @@
 package main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import components.simplereader.SimpleReader;
-import components.simplereader.SimpleReader1L;
+import java.util.Scanner;
 
 /**
  * Contains simple utilities for separating and counting words.
@@ -78,22 +79,34 @@ public final class CWordCounter {
 	 *            - characters which separate tokens. These are excluded from the
 	 *            output.
 	 * @return - the sequence of tokens
+	 * @throws FileNotFoundException
 	 */
-	public static ArrayList<String> separateWordsFromFile(String filename, String separators) {
+	public static ArrayList<String> separateWordsFromFile(String filename, String separators)
+			throws FileNotFoundException {
 		ArrayList<String> pResultSequence = new ArrayList<String>();
-		SimpleReader pFileReader = new SimpleReader1L(filename);
 
-		while (!pFileReader.atEOS()) {
+		File fileHandle = new File("filename");
+		Scanner pFileReader = new Scanner(fileHandle);
+		StringBuffer filebuffer = new StringBuffer("");
+		while (pFileReader.hasNextLine()) {
+			filebuffer.append(pFileReader.nextLine() + "\n");
+		}
+		String file = filebuffer.toString();
+
+		int i = 0;
+		while (i < file.length()) {
 			StringBuffer nextWord = new StringBuffer();
 
 			// Go one character at a time, checking for separators
-			while (!pFileReader.atEOS() && separators.indexOf(pFileReader.peek()) == -1) {
-				nextWord.append(Character.toLowerCase(pFileReader.read()));
+			char next = file.charAt(i);
+			while (i < file.length() && separators.indexOf(next) == -1) {
+				nextWord.append(next);
+				next = file.charAt(++i);
 			}
 
 			// remove the separator we reached
-			if (!pFileReader.atEOS()) {
-				pFileReader.read();
+			if (i < file.length()) {
+				i++;
 			}
 
 			// this catches multiple separators in a row
@@ -120,9 +133,10 @@ public final class CWordCounter {
 	 * @param title
 	 *            - the title of the HTML document, as it's placed in the
 	 *            {@code <title>} tag and in the text itself.
+	 * @throws IOException
 	 */
 	public static void outputToHtml(ArrayList<String> pWordList, Map<String, Integer> pWordCounts, String filename,
-			String title) {
+			String title) throws IOException {
 		// Open the CHtmlWriter
 		// Ignore the warning, it's in fact closed by closeBodyAndStream()
 		@SuppressWarnings("resource")
