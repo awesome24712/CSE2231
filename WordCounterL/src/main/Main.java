@@ -50,7 +50,9 @@ public final class Main {
 		System.out.print("Beginning reading from file...");
 
 		ArrayList<String> pRawWordList = CWordCounter.separateWordsFromFile(filename, " \t\n\r,-.!?[]';:/()");
-		Reporter.assertElseFatalError(pRawWordList.length() > 0, "Text file must not be empty of words");
+		if (pRawWordList.size() == 0) {
+			throw new IOException("File must not be empty\n");
+		}
 
 		// Sort the words
 		Map<String, Integer> pWordCounts = CWordCounter.wordCountMap(pRawWordList);
@@ -94,10 +96,10 @@ public final class Main {
 
 		@Override
 		public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-			if (o1.getKey().equals(o2.getKey())) {
+			if (o1.getValue().equals(o2.getValue())) {
 				return 0;
 			} else {
-				return o1.getValue() < o2.getValue() ? 1 : -1;
+				return o1.getValue() > o2.getValue() ? -1 : 1;
 			}
 		}
 
@@ -109,8 +111,8 @@ public final class Main {
 	public static final CPopularityOrder POPULARITY_ORDER = new CPopularityOrder();
 
 	/**
-	 * Given a map, returns an alphabetically ordered list of the given length
-	 * whose elements are the most common strings appearing in the given map.
+	 * Given a map, returns an alphabetically ordered list of the given length whose
+	 * elements are the most common strings appearing in the given map.
 	 *
 	 * @param pWordCounts
 	 *            - map of words to their counts

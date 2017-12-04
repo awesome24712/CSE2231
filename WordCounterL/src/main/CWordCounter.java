@@ -85,7 +85,7 @@ public final class CWordCounter {
 			throws FileNotFoundException {
 		ArrayList<String> pResultSequence = new ArrayList<String>();
 
-		File fileHandle = new File("filename");
+		File fileHandle = new File(filename);
 		Scanner pFileReader = new Scanner(fileHandle);
 		StringBuffer filebuffer = new StringBuffer("");
 		while (pFileReader.hasNextLine()) {
@@ -111,7 +111,7 @@ public final class CWordCounter {
 
 			// this catches multiple separators in a row
 			if (nextWord.length() > 0) {
-				pResultSequence.add(0, nextWord.toString());
+				pResultSequence.add(0, nextWord.toString().toLowerCase());
 			}
 		}
 
