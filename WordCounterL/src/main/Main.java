@@ -75,20 +75,20 @@ public final class Main {
 	}
 
 	/**
-	 * Given a list of words, puts it into alphabetical order, whic A, B C etc.
-	 * coming at the beginning of the sequence
+	 * Given a list of words, puts it into alphabetical order, with A, B C etc.
+	 * coming at the beginning of the list
 	 *
 	 * @param pWordList
-	 *            - the sequence to sort
+	 *            - the list to sort
 	 */
 	public static void sortWordList(ArrayList<String> pWordList) {
-		// just use the sorting machine... ughh
+		// just use the built-in sort method
 		Comparator<String> pOrder = String.CASE_INSENSITIVE_ORDER;
 		pWordList.sort(pOrder);
 	}
 
 	/**
-	 * Compares the integer values of a Pair<String, Integer> .
+	 * Compares the integer values of a Entry<String, Integer> .
 	 *
 	 * @author Michael Trunk
 	 */
@@ -118,8 +118,8 @@ public final class Main {
 	 *            - map of words to their counts
 	 * @param amountFirstWords
 	 *            - the amount of most popular words to put into the returned
-	 *            Sequence
-	 * @return - the sequence of most common words
+	 *            ArrayList
+	 * @return - the ArrayList of most common words
 	 */
 	public static ArrayList<String> sortWordListAlphabeticalMostPop(Map<String, Integer> pWordCounts,
 			int amountFirstWords) {

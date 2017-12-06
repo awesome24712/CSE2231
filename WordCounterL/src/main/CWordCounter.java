@@ -23,10 +23,10 @@ public final class CWordCounter {
 	}
 
 	/**
-	 * Counts the number of time a String appears in a given sequence.
+	 * Counts the number of time a String appears in a given list.
 	 *
 	 * @param pWordList
-	 *            - the sequence of Strings.
+	 *            - the list of Strings.
 	 * @return - a String-to-Integer map.
 	 */
 	public static Map<String, Integer> wordCountMap(ArrayList<String> pWordList) {
@@ -71,14 +71,14 @@ public final class CWordCounter {
 	}
 
 	/**
-	 * Given a filename, splits tokens from the file into the returned sequence.
+	 * Given a filename, splits tokens from the file into the returned list.
 	 *
 	 * @param filename
 	 *            - the name of the file to open
 	 * @param separators
 	 *            - characters which separate tokens. These are excluded from the
 	 *            output.
-	 * @return - the sequence of tokens
+	 * @return - the list of tokens
 	 * @throws FileNotFoundException
 	 */
 	public static ArrayList<String> separateWordsFromFile(String filename, String separators)
